@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Replicon PreFiller</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script th:src="@{/js/home.js}" type="text/javascript"></script>
+</head>
+<body>
+  <h1>Hello !</h1>
+  <p>Welcome to <span th:text="${appName}">Our app</span></p>
+
+  <div>
+    <p>Okta login</p>
+    <form>
+      <label for="okta-username">Okta username:</label>
+      <input name="username" id="okta-username" type="text"><br>
+      <label for="okta-password">Okta password:</label>
+      <input name="password" id="okta-password" type="password"><br>
+      <input type="button" onclick="oktaLogin()" value="Login">
+    </form>
+  </div>
+
+  <div>
+    <p>Google login</p>
+    <form>
+      <label for="google-username">Google username:</label>
+      <input name="username" id="google-username" type="text"><br>
+      <label for="google-password">Google password:</label>
+      <input name="password" id="google-password" type="password"><br>
+      <input type="button" onclick="googleLogin()" value="Login">
+    </form>
+  </div>
+
+  <div>
+    <form>
+      <input type="button" onclick="$.post('/api/prefill')" value="Pre-fill Replicon">
+    </form>
+  </div>
+
+  <div id="logger-div"></div>
+</body>
+</html>

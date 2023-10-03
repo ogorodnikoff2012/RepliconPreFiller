@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+printf '\npost-checkout hook\n\n'
+
+prevHEADraw=$1
+newHEADraw=$2
+checkoutType=$3
+
+[[ $checkoutType == 1 ]] && checkoutType='branch' ||
+                            checkoutType='file' ;
+prevHEAD="$(git name-rev --name-only "$prevHEADraw")"
+newHEAD="$(git name-rev --name-only "$newHEADraw")"
+
+echo "Checkout type: $checkoutType"
+echo "    prev HEAD: $prevHEAD"
+echo "     new HEAD: $newHEAD"
+
+printf '{"timestamp":"%s","checkoutType":"%s","prevHEAD":"%s","prevHEADraw":"%s","newHEAD":"%s","newHEADraw":"%s"}\n' "$(date -Iseconds)" "$checkoutType" "$prevHEAD" "$prevHEADraw" "$newHEAD" "$newHEADraw" >> checkout-history.json
